@@ -170,8 +170,9 @@ def oauth_auth_view(request, token, callback, params):
         'oauth_callback': token.get_callback_url() or callback,
       })
 
+    context = dict(form=form, token=token)
     return render_to_response('piston/authorize_token.html',
-            { 'form': form }, RequestContext(request))
+            context, RequestContext(request))
 
 @login_required
 def oauth_user_auth(request):
