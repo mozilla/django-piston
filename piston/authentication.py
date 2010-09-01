@@ -265,7 +265,7 @@ class OAuthAuthentication(object):
 
         return False
 
-    def challenge(self):
+    def challenge(self, request=None):
         """
         Returns a 401 response with a small bit on
         what OAuth is, and where to learn more about it.
@@ -282,12 +282,10 @@ class OAuthAuthentication(object):
 
         for k, v in self.builder(realm=realm).iteritems():
             response[k] = v
-
         tmpl = loader.render_to_string('oauth/challenge.html',
             { 'MEDIA_URL': settings.MEDIA_URL })
 
         response.content = tmpl
-
         return response
 
     @staticmethod
