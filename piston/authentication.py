@@ -111,11 +111,11 @@ def initialize_server_request(request):
     """
     Shortcut for initialization.
     """
-    if request.method == "POST": #and \
-#       request.META['CONTENT_TYPE'] == "application/x-www-form-urlencoded":
+    # c.f. http://www.mail-archive.com/oauth@googlegroups.com/msg01556.html
+    if (request.method == 'POST' and request.FILES == {}):
         params = dict(request.REQUEST.items())
     else:
-        params = { }
+        params = {}
 
     # Seems that we want to put HTTP_AUTHORIZATION into 'Authorization'
     # for oauth.py to understand. Lovely.
